@@ -227,6 +227,18 @@ var LeafletPolylineView = LeafletPathView.extend({
             this.get_options()
         );
     },
+
+    model_events: function () {
+        LeafletPolylineView.__super__.model_events.apply(this, arguments);
+        this.listenTo(this.model, 'change:locations', function () {
+            this.obj.setLatLngs(this.model.get('locations'));
+            this.send({
+                event: 'move',
+                location: this.model.get('locations')
+            });
+        }, this);
+    },
+
 });
 
 

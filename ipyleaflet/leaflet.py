@@ -392,7 +392,7 @@ class Polyline(Path):
     _view_name = Unicode('LeafletPolylineView').tag(sync=True)
     _model_name = Unicode('LeafletPolylineModel').tag(sync=True)
 
-    locations = List().tag(sync=True)
+    locations = List().tag(sync=True, o=True)
     smooth_factor = Float(1.0).tag(sync=True, o=True)
     no_clip = Bool(False).tag(sync=True, o=True)
 
@@ -654,8 +654,8 @@ class Map(DOMWidget, InteractMixin):
                 (self.north, self.east),
                 (self.south, self.east),
                 (self.south, self.west)]
-      
-    @property     
+
+    @property
     def bounds(self):
         return [(self.south, self.west),
                 (self.north, self.east)]
@@ -765,4 +765,3 @@ class Map(DOMWidget, InteractMixin):
 
     def on_moveend(self, callback, remove=False):
         self._moveend_callbacks.register_callback(callback, remove=remove)
-
